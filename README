@@ -1,6 +1,19 @@
 -------------------------------------------------------------------------------
 README
 -------------------------------------------------------------------------------
+
+This is a fork of DSLogic program from DreamSource Lab whose intention
+is to port the application to Mac OS X.
+
+Currently the code compiles and the application starts. As I do not
+have a DSLogic board available (yet, it will be coming through the
+Kickstarter campaign) there is absolutely no guarantee that this is
+functional.
+
+sigrok dependencies were installed through Homebrew (http://brew.sh)
+
+-------------------------------------------------------------------------------
+
 DSLogic is an open source multi-function instrument for everyone.
 DSLogic software is based on sigrok project.
 You can find DSLogic on:
