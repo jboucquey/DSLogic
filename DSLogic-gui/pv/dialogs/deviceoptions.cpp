@@ -78,9 +78,9 @@ void DeviceOptions::accept()
 	QDialog::accept();
 
 	// Commit the properties
-	const vector< shared_ptr<pv::prop::Property> > &properties =
+	const vector< boost::shared_ptr<pv::prop::Property> > &properties =
 		_device_options_binding.properties();
-	BOOST_FOREACH(shared_ptr<pv::prop::Property> p, properties) {
+	BOOST_FOREACH(boost::shared_ptr<pv::prop::Property> p, properties) {
 		assert(p);
 		p->commit();
 	}
@@ -103,9 +103,9 @@ QWidget* DeviceOptions::get_property_form()
 	form->setLayout(layout);
 
     layout->addRow("Device Mode", &_mode_comboBox);
-	const vector< shared_ptr<pv::prop::Property> > &properties =
+    const vector< boost::shared_ptr<pv::prop::Property> > &properties =
 		_device_options_binding.properties();
-	BOOST_FOREACH(shared_ptr<pv::prop::Property> p, properties)
+    BOOST_FOREACH(boost::shared_ptr<pv::prop::Property> p, properties)
 	{
 		assert(p);
 		const QString label = p->labeled_widget() ? QString() : p->name();

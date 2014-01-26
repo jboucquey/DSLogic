@@ -84,12 +84,12 @@ void GroupSignal::paint(QPainter &p, int y, int left, int right, double scale,
     _scale = _signalHeight * 1.0f / pow(2, _index_list.size());
 	paint_axis(p, y, left, right);
 
-    const deque< shared_ptr<pv::data::GroupSnapshot> > &snapshots =
+        const deque< boost::shared_ptr<pv::data::GroupSnapshot> > &snapshots =
 		_data->get_snapshots();
     if (snapshots.empty())
 		return;
 
-    const shared_ptr<pv::data::GroupSnapshot> &snapshot =
+    const boost::shared_ptr<pv::data::GroupSnapshot> &snapshot =
             snapshots.at(_sec_index);
 
 	const double pixels_offset = offset / scale;
@@ -116,7 +116,7 @@ void GroupSignal::paint(QPainter &p, int y, int left, int right, double scale,
 }
 
 void GroupSignal::paint_trace(QPainter &p,
-    const shared_ptr<pv::data::GroupSnapshot> &snapshot,
+                              const boost::shared_ptr<pv::data::GroupSnapshot> &snapshot,
 	int y, int left, const int64_t start, const int64_t end,
 	const double pixels_offset, const double samples_per_pixel)
 {
@@ -144,7 +144,7 @@ void GroupSignal::paint_trace(QPainter &p,
 }
 
 void GroupSignal::paint_envelope(QPainter &p,
-    const shared_ptr<pv::data::GroupSnapshot> &snapshot,
+                                 const boost::shared_ptr<pv::data::GroupSnapshot> &snapshot,
 	int y, int left, const int64_t start, const int64_t end,
 	const double pixels_offset, const double samples_per_pixel)
 {

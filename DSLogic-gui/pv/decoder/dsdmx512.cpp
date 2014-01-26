@@ -53,7 +53,7 @@ const QString dsDmx512::StateTable[TableSize] = {
     "SLOT"
 };
 
-dsDmx512::dsDmx512(shared_ptr<data::Logic> data, std::list <int > _sel_probes, QMap<QString, QVariant> &_options, QMap<QString, int> _options_index) :
+  dsDmx512::dsDmx512(boost::shared_ptr<data::Logic> data, std::list <int > _sel_probes, QMap<QString, QVariant> &_options, QMap<QString, int> _options_index) :
     Decoder(data, _sel_probes, _options_index)
 {
     (void)_options;
@@ -91,12 +91,12 @@ void dsDmx512::decode()
     _max_width = 0;
     uint8_t cur_state = Unknown;
 
-    const deque< shared_ptr<pv::data::LogicSnapshot> > &snapshots =
+    const deque< boost::shared_ptr<pv::data::LogicSnapshot> > &snapshots =
         _data->get_snapshots();
     if (snapshots.empty())
         return;
 
-    const shared_ptr<pv::data::LogicSnapshot> &snapshot =
+    const boost::shared_ptr<pv::data::LogicSnapshot> &snapshot =
         snapshots.front();
 
     //uint64_t flag_index;
@@ -200,6 +200,8 @@ uint8_t dsDmx512::get_next_data(bool code, bool &valid, uint8_t &cur_state,
         return data;
     }
 
+    //FIX -- 
+    src_ptr = NULL;
     if (cur_state == Start) {
         src_ptr = (uint8_t*)snapshot->get_data();
         start = end;
@@ -261,11 +263,11 @@ void dsDmx512::get_subsampled_states(std::vector<struct ds_view_state> &states,
 {
     ds_view_state view_state;
 
-    const deque< shared_ptr<pv::data::LogicSnapshot> > &snapshots =
+    const deque< boost::shared_ptr<pv::data::LogicSnapshot> > &snapshots =
         _data->get_snapshots();
     if (snapshots.empty())
         return;
-    const shared_ptr<pv::data::LogicSnapshot> &snapshot =
+    const boost::shared_ptr<pv::data::LogicSnapshot> &snapshot =
         snapshots.front();
 
     assert(end <= snapshot->get_sample_count());
